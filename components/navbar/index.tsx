@@ -1,10 +1,18 @@
 "use client";
-import React, { useEffect, useRef } from "react";
-import * as styles from "./styles";
+import React, { useEffect, useRef, useState } from "react";
+import { usePathname } from "next/navigation";
+import { Alkatra } from "next/font/google";
+
 import { colors } from "theme";
+import useGlobal from "context/global/useGlobal";
 import { gsap, Power2 } from "gsap";
 
+import * as styles from "./styles";
+
+const alkatra = Alkatra({ subsets: ["latin"] });
+
 const Navbar: React.FC = () => {
+  const { data } = useGlobal();
   const {
     Navbar,
     Button,
@@ -24,6 +32,7 @@ const Navbar: React.FC = () => {
     Link,
     MenuItemRevealer,
   } = styles;
+  const pathName = usePathname();
   const hamburger = useRef<HTMLDivElement>(null);
   const tl = useRef(gsap.timeline({ paused: true, reversed: true })); // define timeline using useRef
   const path = useRef<SVGPathElement>(null);
@@ -37,11 +46,12 @@ const Navbar: React.FC = () => {
 
   useEffect(() => {
     tl.current = gsap.timeline({ paused: true, reversed: true });
+    // const start = "M0 3000S237 1500 1500 1500S3000 3000 3000 3000V0H0Z";
     const start = "M0 502S175 272 500 272s500 230 500 230V0H0Z";
-    const mid = "M 0 502 S 187 313 553 315 s 500 267 491 240 V -361 H 1 Z";
     const end = "M0,1005S175,995,500,995s500,5,500,5V0H0Z";
     const power2 = "power2.inOut";
     const power4 = "power4.inOut";
+    const btnColor = colors.vintage.orange;
 
     tl.current
       .to("#hamburger", {
@@ -54,7 +64,7 @@ const Navbar: React.FC = () => {
         ".top-bun",
         {
           duration: 1,
-          background: colors.rose,
+          background: btnColor,
           ease: power2,
           rotation: 45,
           width: "24px",
@@ -66,7 +76,7 @@ const Navbar: React.FC = () => {
         ".bottom-bun",
         {
           duration: 1,
-          background: colors.rose,
+          background: btnColor,
           ease: power2,
           width: "24px",
           rotation: -45,
@@ -82,7 +92,7 @@ const Navbar: React.FC = () => {
           y: 40,
           width: "140px",
           height: "140px",
-          border: `1px solid ${colors.rose}`,
+          border: `1px solid ${btnColor}`,
           ease: power4,
         },
         "<"
@@ -91,10 +101,10 @@ const Navbar: React.FC = () => {
         path.current,
         {
           duration: 0.8,
+          ease: Power2.easeInOut,
           attr: {
             d: start,
           },
-          ease: Power2.easeIn,
         },
         "<"
       )
@@ -102,38 +112,40 @@ const Navbar: React.FC = () => {
         path.current,
         {
           duration: 0.8,
+          ease: Power2.easeInOut,
           attr: {
             d: end,
           },
-          ease: Power2.easeIn,
         },
         ">"
       )
       .to(
         ".menu",
         {
-          duration: 1,
+          duration: 0.2,
           visibility: "visible",
-        },
-        "<"
-      )
-      .to(
-        ".link",
-        {
-          duration: 1,
-          top: 0,
           ease: "power3.out",
-          stagger: {
-            amount: 0.5,
-          },
         },
-        "-=1"
+        ">"
       );
     gsap.set(".menu", { visibility: "hidden" });
   }, []);
 
+  useEffect(() => {
+    if (tl.current) {
+      tl.current.to(".link", {
+        duration: 0.2,
+        top: 0,
+        ease: "power3.out",
+        stagger: {
+          amount: 0.5,
+        },
+      });
+    }
+  }, [data]);
+
   return (
-    <Navbar>
+    <Navbar className={alkatra.className}>
       <Button className="btn" id="toggle-btn" onClick={revealMenu}>
         <AnimatedBorder className="btn-outline btn-outline-1"></AnimatedBorder>
         <NonAnimatedBorder className="btn-outline btn-outline-2"></NonAnimatedBorder>
@@ -144,37 +156,33 @@ const Navbar: React.FC = () => {
       </Button>
       <Overlay className="overlay">
         <Svg viewBox="0 0 1000 1000">
-          <Path ref={path} d="M0 2S175 1 500 1s500 1 500 1V0H0Z"></Path>
+          <Path ref={path} d="M0 0S175 0 500 0S3000 0 3000 0V0H0Z"></Path>
         </Svg>
       </Overlay>
       <Menu className="menu">
         <PrimaryMenu>
           <MenuContainer>
             <MenuWrapper>
-              <MenuItem>
-                <Link className="link" href="#">
-                  <span>I</span>Home
-                </Link>
-                <MenuItemRevealer></MenuItemRevealer>
-              </MenuItem>
-              <MenuItem>
-                <Link className="link ml-16" href="#">
-                  <span>II</span>Work
-                </Link>
-                <MenuItemRevealer></MenuItemRevealer>
-              </MenuItem>
-              <MenuItem>
-                <Link className="link" href="#">
-                  <span>III</span>Projects
-                </Link>
-                <MenuItemRevealer></MenuItemRevealer>
-              </MenuItem>
-              <MenuItem>
-                <Link className="link ml-16" href="#">
-                  <span>IV</span>Contact
-                </Link>
-                <MenuItemRevealer></MenuItemRevealer>
-              </MenuItem>
+              {data?.navbar &&
+                Object.keys(data?.navbar).map((key) => {
+                  const numericKey = parseInt(key, 10);
+                  const menuItem = data.navbar[key];
+                  const classNames = `link ${numericKey % 2 === 0 && "ml-16"}`;
+                  return (
+                    <MenuItem key={key}>
+                      <Link
+                        className={classNames}
+                        isActive={pathName === menuItem.path}
+                        href={menuItem.path}
+                        onClick={revealMenu}
+                      >
+                        <span>{key}</span>
+                        {menuItem.title}
+                      </Link>
+                      <MenuItemRevealer></MenuItemRevealer>
+                    </MenuItem>
+                  );
+                })}
             </MenuWrapper>
           </MenuContainer>
         </PrimaryMenu>

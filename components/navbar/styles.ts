@@ -1,12 +1,14 @@
 "use client";
-import styled from "styled-components";
+import styled, { css } from "styled-components";
 import Link from "next/link";
 
 import { colors, sizes, media } from "theme";
 
-const Navbar = styled.div`
-  font-family: "Roslindale Display Condensed";
-`;
+type Props = {
+  isActive: boolean;
+};
+
+const Navbar = styled.div``;
 
 const Button = styled.div`
   position: fixed;
@@ -39,7 +41,7 @@ const AnimatedBorder = styled.div`
   position: absolute;
   width: 100%;
   height: 100%;
-  border: 1px solid ${colors.rose};
+  border: 1px solid ${colors.vintage.red};
   border-radius: 60% 40% 30% 70% / 60% 30% 70% 40%;
   animation: morph 4s linear infinite;
 `;
@@ -48,7 +50,7 @@ const NonAnimatedBorder = styled.div`
   position: absolute;
   width: 100%;
   height: 100%;
-  border: 1px solid ${colors.rose};
+  border: 1px solid ${colors.vintage.red};
   border-radius: 53% 47% 43% 57% / 51% 39% 61% 49%;
 `;
 
@@ -65,7 +67,7 @@ const TopBun = styled.div`
   display: inline-block;
   width: 18px;
   height: 1.25px;
-  background: ${colors.rose};
+  background: ${colors.vintage.red};
   transform: translateY(-4px);
   transition: transform 0.25s;
 `;
@@ -76,7 +78,7 @@ const BottomBun = styled.div`
   display: inline-block;
   width: 24px;
   height: 1.25px;
-  background: ${colors.rose};
+  background: ${colors.vintage.red};
   transform: translateY(-50%);
   transition: transform 0.25s;
 `;
@@ -85,10 +87,14 @@ const Overlay = styled.div``;
 
 const Svg = styled.svg`
   position: fixed;
+  height: 100vh;
+  ${media.mediumSmall`
+    height: auto;
+  `}
 `;
 
 const Path = styled.path`
-  fill: ${colors.yellow};
+  fill: ${colors.vintage.black};
 `;
 
 const Menu = styled.div`
@@ -146,25 +152,36 @@ const MenuItem = styled.div`
     margin: 0 auto;
   }
 `;
-const StyledLink = styled(Link)`
+
+const StyledLink = styled(Link)<Props>`
   position: relative;
   top: 20px;
   line-height: 70%;
   text-decoration: none;
-  color: ${colors.rose};
+  color: ${colors.vintage.beige};
   text-transform: uppercase;
   font-size: 35px;
   font-weight: 700;
   z-index: 2;
 
+  ${({ isActive }) =>
+    isActive &&
+    css`
+      color: ${colors.vintage.red};
+    `}
+
   span {
     font-size: 20px;
     margin-right: 2em;
-    font-family: "Ayer";
   }
 
-  :hover {
-    color: red;
+  &:hover {
+    color: ${colors.vintage.orange};
+    ${({ isActive }) =>
+      isActive &&
+      css`
+        color: ${colors.vintage.red};
+      `}
   }
 
   ${media.small`
@@ -182,6 +199,7 @@ const StyledLink = styled(Link)`
       font-size: 125px;
   `}
 `;
+
 const MenuItemRevealer = styled.div``;
 
 export {

@@ -22,11 +22,20 @@
     "baseUrl": ".",
     "paths": {
       "lib/*": ["lib/*"],
-      "utils/*": ["utils/*"],
       "theme/*": ["theme/*"],
+      "utils/*": ["utils/*"],
+      "constants/*": ["constants/*"],
+      "context/*": ["context/*"],
       "components/*": ["components/*"]
     }
   },
-  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", "theme/media.js"],
+  "include": [
+    "next-env.d.ts",
+    "**/*.ts",
+    "**/*.tsx",
+    "theme/media.js",
+    ".next/types/**/*.ts",
+    "lib/api/contentful.js"
+  ],
   "exclude": ["node_modules"]
 }
