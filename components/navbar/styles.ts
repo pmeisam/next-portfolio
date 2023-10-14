@@ -2,58 +2,27 @@
 import styled from "styled-components";
 import Link from "next/link";
 
-import { colors } from "theme";
+import { colors, sizes, media } from "theme";
 
-export const Navbar = styled.div`
-  width: 100vw;
-  height: 100vh;
-  background: ${colors.bgColor};
+const Navbar = styled.div`
   font-family: "Roslindale Display Condensed";
-  overflow: hidden;
+`;
 
-  .overlay {
-    position: absolute;
-    width: 100vw;
-    height: 100vh;
-    top: 0;
-    left: 0;
-    z-index: 0;
-  }
+const Button = styled.div`
+  position: fixed;
+  top: 0;
+  right: 0;
+  width: ${sizes.mainMenu.button.mobile}px;
+  height: ${sizes.mainMenu.button.mobile}px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 2em;
+  z-index: 2;
+  cursor: pointer;
+`;
 
-  svg path {
-    fill: ${colors.overlayBg};
-  }
-
-  #toggle-btn {
-    position: absolute;
-    top: 0;
-    right: 0;
-    width: 100px;
-    height: 100px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    margin: 2em;
-    z-index: 2;
-    cursor: pointer;
-  }
-
-  .btn-outline {
-    position: absolute;
-    width: 100px;
-    height: 100px;
-    border: 1px solid ${colors.overlayBg};
-  }
-
-  .btn-outline-1 {
-    border-radius: 60% 40% 30% 70% / 60% 30% 70% 40%;
-    animation: morph 4s linear infinite;
-  }
-
-  .btn-outline-2 {
-    border-radius: 53% 47% 43% 57% / 51% 39% 61% 49%;
-  }
-
+const AnimatedBorder = styled.div`
   @keyframes morph {
     0% {
       border-radius: 60% 40% 30% 70% / 60% 30% 70% 40%;
@@ -67,122 +36,170 @@ export const Navbar = styled.div`
       border-radius: 60% 40% 30% 70% / 60% 30% 70% 40%;
     }
   }
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  border: 1px solid ${colors.rose};
+  border-radius: 60% 40% 30% 70% / 60% 30% 70% 40%;
+  animation: morph 4s linear infinite;
+`;
 
-  #hamburger {
-    position: relative;
-    width: 20px;
-    height: 20px;
-    z-index: 2;
-  }
+const NonAnimatedBorder = styled.div`
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  border: 1px solid ${colors.rose};
+  border-radius: 53% 47% 43% 57% / 51% 39% 61% 49%;
+`;
 
-  #hamburger .span2 {
-    position: absolute;
-    top: 50%;
-    transform: translateY(-50%);
-    display: inline-block;
-    width: 24px;
-    height: 1.25px;
-    background: ${colors.overlayBg};
-    transition: transform 0.25s;
-  }
+const Hamburger = styled.div`
+  position: relative;
+  width: 20px;
+  height: 20px;
+  z-index: 2;
+`;
 
-  #hamburger .span1 {
-    position: absolute;
-    right: 0;
-    display: inline-block;
-    /* content: ""; */
-    width: 18px;
-    height: 1.25px;
-    background: ${colors.overlayBg};
-    transform: translateY(-4px);
-    transition: transform 0.25s;
-  }
+const TopBun = styled.div`
+  position: absolute;
+  right: 0;
+  display: inline-block;
+  width: 18px;
+  height: 1.25px;
+  background: ${colors.rose};
+  transform: translateY(-4px);
+  transition: transform 0.25s;
+`;
 
-  .active .span1 {
-    transform: rotate(45deg);
-  }
+const BottomBun = styled.div`
+  position: absolute;
+  top: 50%;
+  display: inline-block;
+  width: 24px;
+  height: 1.25px;
+  background: ${colors.rose};
+  transform: translateY(-50%);
+  transition: transform 0.25s;
+`;
 
-  .active .span2 {
-    top: unset;
-    width: 24px;
-    transform: rotate(-90deg);
-  }
+const Overlay = styled.div``;
 
-  .menu {
-    position: fixed;
-    top: 0;
-    width: 100vw;
-    height: 100vh;
-    display: flex;
-  }
+const Svg = styled.svg`
+  position: fixed;
+`;
 
-  .menu > div {
-    height: 100%;
-    display: flex;
-  }
+const Path = styled.path`
+  fill: ${colors.yellow};
+`;
 
-  .menu a {
-    position: relative;
-    top: 120px;
-    line-height: 70%;
-    text-decoration: none;
-    color: ${colors.linkColor};
-  }
+const Menu = styled.div`
+  position: fixed;
+  top: 0;
+  width: ${sizes.mainMenu.menu.width}vw;
+  height: ${sizes.mainMenu.menu.height}vh;
+  display: flex;
+  visibility: hidden;
+`;
 
-  .menu a span {
-    font-size: 20px;
-    margin-right: 2em;
-    font-family: "Ayer";
-  }
+const PrimaryMenu = styled.div`
+  height: 100%;
+  flex: 3;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+`;
 
-  .menu-item {
-    position: relative;
-  }
+const MenuContainer = styled.div`
+  width: 70%;
+  height: 50%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+`;
 
-  .menu-item:after {
+const MenuWrapper = styled.div`
+  width: 100%;
+  height: 40%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  ${media.small`
+      
+  `}
+
+  ${media.mediumSmall`
+    
+  `}
+  ${media.medium`
+  height: 100%;
+  `}
+`;
+const MenuItem = styled.div`
+  position: relative;
+  :after {
     content: "";
     position: absolute;
     top: 100px;
     left: -20px;
     width: 120%;
     height: 200%;
-    /* background: ${colors.overlayBg}; */
     margin: 0 auto;
   }
-
-  .menu-container {
-    width: 70%;
-    height: 50%;
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-  }
-
-  .primary-menu {
-    flex: 3;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-  }
-  .primary-menu .menu-container .wrapper {
-    width: 100%;
-    height: 100%;
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-  }
-
-  .primary-menu a {
-    text-transform: uppercase;
-    font-size: 125px;
-    font-weight: 500;
-  }
-
-  .primary-menu .menu-container .wrapper .menu-item:nth-child(1) a,
-  .primary-menu .menu-container .wrapper .menu-item:nth-child(3) a {
-    margin-left: 1em;
-  }
 `;
+const StyledLink = styled(Link)`
+  position: relative;
+  top: 20px;
+  line-height: 70%;
+  text-decoration: none;
+  color: ${colors.rose};
+  text-transform: uppercase;
+  font-size: 35px;
+  font-weight: 700;
+  z-index: 2;
 
-export const StyledLink = styled(Link)``;
+  span {
+    font-size: 20px;
+    margin-right: 2em;
+    font-family: "Ayer";
+  }
+
+  :hover {
+    color: red;
+  }
+
+  ${media.small`
+      top: 80px;
+      font-size: 65px;
+  `}
+
+  ${media.mediumSmall`
+      top: 100px;
+      font-size: 95px;
+      font-weight: 500;
+  `}
+  ${media.medium`
+      top: 120px;
+      font-size: 125px;
+  `}
+`;
+const MenuItemRevealer = styled.div``;
+
+export {
+  Navbar,
+  Button,
+  AnimatedBorder,
+  NonAnimatedBorder,
+  Hamburger,
+  TopBun,
+  BottomBun,
+  Overlay,
+  Svg,
+  Path,
+  Menu,
+  PrimaryMenu,
+  MenuContainer,
+  MenuWrapper,
+  MenuItem,
+  StyledLink as Link,
+  MenuItemRevealer,
+};
