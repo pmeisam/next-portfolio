@@ -1,0 +1,124 @@
+import React, { useEffect, useRef } from "react";
+import { gsap, Sine } from "gsap";
+
+import { colors } from "theme";
+import * as styles from "./styles";
+
+const HamburgerMenu = () => {
+  const { Wrapper } = styles;
+
+  const tl = useRef(
+    gsap.timeline({
+      paused: true,
+      reversed: true,
+    })
+  ); // define timeline using useRef
+
+  const handleClick = () => {
+    if (tl.current) {
+      tl.current.reversed()
+        ? tl.current.timeScale(1).play()
+        : tl.current.reverse();
+    }
+  };
+
+  useEffect(() => {
+    tl.current = gsap.timeline({
+      paused: true,
+      reversed: true,
+    });
+    tl.current
+      .to(
+        ".top",
+        {
+          y: "-5px",
+          transformOrigin: "50% 50%",
+          ease: Sine.easeInOut,
+          duration: 0.5,
+        },
+        "topBotStar"
+      )
+      .to(
+        ".bot",
+        {
+          y: "5px",
+          transformOrigin: "50% 50%",
+          ease: Sine.easeInOut,
+          duration: 0.5,
+        },
+        "topBotStar"
+      )
+      .to(
+        ".mid",
+        {
+          autoAlpha: 0,
+          x: "-40px",
+          transformOrigin: "50% 50%",
+          ease: Sine.easeInOut,
+          duration: 0.2,
+        },
+        "-=0.2"
+      )
+      .add("finish")
+      .to(
+        ".top",
+        {
+          y: "5px",
+          rotation: -45,
+          transformOrigin: "50% 50%",
+          ease: Sine.easeInOut,
+          duration: 0.5,
+        },
+        "finish"
+      )
+      .to(
+        ".bot",
+        {
+          y: "-5px",
+          rotation: 45,
+          transformOrigin: "50% 50%",
+          ease: Sine.easeInOut,
+          duration: 0.5,
+        },
+        "finish"
+      )
+      .to("#burger", {
+        rotation: 360,
+        transformOrigin: "50% 50%",
+        ease: Sine.easeInOut,
+        duration: 0.5,
+        fill: colors.white,
+      });
+    return () => {
+      // Cleanup function
+      tl.current.kill(); // This will kill the timeline and its events
+    };
+  }, []);
+
+  return (
+    <Wrapper ref={tl} onClick={handleClick}>
+      <svg
+        id="burger"
+        fill={colors.darkBlue}
+        width="30"
+        className="openmenu"
+        viewBox="0 0 30 30"
+      >
+        <path className="top" d="M0 9h30v2H0z" />
+        <line
+          className="mid"
+          x1="0"
+          y1="15"
+          x2="30"
+          y2="15"
+          stroke={colors.darkBlue}
+          strokeWidth="2"
+          vectorEffect="non-scaling-stroke"
+        />
+        <path className="bot" d="M0 19h30v2H0z" />
+      </svg>
+    </Wrapper>
+  );
+};
+
+export default HamburgerMenu;

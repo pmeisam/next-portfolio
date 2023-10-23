@@ -1,13 +1,10 @@
 import { createContext } from "react";
-
-export interface ContextType {
-  navbar: object | null;
-}
+import { ContextType } from "types";
 
 const defaultContext: ContextType = {
-  navbar: null,
+  navbar: {},
 };
 
-const GlobalContext = createContext<ContextType>(defaultContext);
+const GlobalContext = createContext<ContextType | null>(defaultContext);
 
 export default GlobalContext;

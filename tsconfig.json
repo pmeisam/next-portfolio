@@ -26,7 +26,8 @@
       "utils/*": ["utils/*"],
       "constants/*": ["constants/*"],
       "context/*": ["context/*"],
-      "components/*": ["components/*"]
+      "components/*": ["components/*"],
+      "types/*": ["types/*"]
     }
   },
   "include": [
@@ -35,7 +36,7 @@
     "**/*.tsx",
     "theme/media.js",
     ".next/types/**/*.ts",
-    "lib/api/contentful.js"
+    "lib/api/contentful.ts"
   ],
   "exclude": ["node_modules"]
 }

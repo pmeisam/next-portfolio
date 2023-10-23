@@ -2,27 +2,27 @@
 import { ReactNode, useState, useEffect } from "react";
 
 import { fetchGlobal } from "lib/api/contentful";
-import GlobalContext, { ContextType } from "./globalContext";
+import { ContextType } from "types";
+import GlobalContext from "./globalContext";
 
 export const GlobalProvider = ({ children }: { children: ReactNode }) => {
   const [loadingStatus, setLoadingStatus] = useState<
     "pending" | "rejected" | "success"
   >("pending");
 
-  const [data, setData] = useState<object | null>(null);
+  const [data, setData] = useState<ContextType | null>(null);
 
   useEffect(() => {
     async function fetchData() {
       try {
-        const data: ContextType = await fetchGlobal();
-        setData(data);
+        const fetchedData: ContextType | null = await fetchGlobal();
+        setData(fetchedData);
         setLoadingStatus("success");
       } catch (error) {
         console.error("Error fetching global data:", error);
         setLoadingStatus("rejected");
       }
     }
-
     fetchData();
   }, []);
 
@@ -36,6 +36,6 @@ export const GlobalProvider = ({ children }: { children: ReactNode }) => {
   }
 
   return (
-    <GlobalContext.Provider value={{ data }}>{children}</GlobalContext.Provider>
+    <GlobalContext.Provider value={data}>{children}</GlobalContext.Provider>
   );
 };

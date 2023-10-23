@@ -1,7 +1,4 @@
 export const colors = {
-  bgColor: "#e5e3dc",
-  linkColor: "#e2e2dc",
-  overlayBg: "#0a0a0a",
   // Jigh colors
   night: "#0C0F0A",
   rose: "#FF206E",
@@ -21,4 +18,9 @@ export const colors = {
     red: "#B46060",
     black: "#4D4D4D",
   },
+  // GPT colors
+  darkBlue: "#2B3A67",
+  gold: "#F1C40F",
+  red: "#E74C3C",
+
 };
