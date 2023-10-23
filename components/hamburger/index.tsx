@@ -4,7 +4,7 @@ import { gsap, Sine } from "gsap";
 import { colors } from "theme";
 import * as styles from "./styles";
 
-const HamburgerMenu = () => {
+const HamburgerMenu = ({ onClick }: { onClick: any }) => {
   const { Wrapper } = styles;
 
   const tl = useRef(
@@ -15,6 +15,7 @@ const HamburgerMenu = () => {
   ); // define timeline using useRef
 
   const handleClick = () => {
+    onClick();
     if (tl.current) {
       tl.current.reversed()
         ? tl.current.timeScale(1).play()
@@ -91,7 +92,7 @@ const HamburgerMenu = () => {
       });
     return () => {
       // Cleanup function
-      tl.current.kill(); // This will kill the timeline and its events
+      // tl.current.kill(); // This will kill the timeline and its events
     };
   }, []);
 
@@ -99,7 +100,7 @@ const HamburgerMenu = () => {
     <Wrapper onClick={handleClick}>
       <svg
         id="burger"
-        fill={colors.darkBlue}
+        fill={colors.premier.red}
         width="30"
         className="openmenu"
         viewBox="0 0 30 30"
@@ -111,7 +112,7 @@ const HamburgerMenu = () => {
           y1="15"
           x2="30"
           y2="15"
-          stroke={colors.darkBlue}
+          stroke={colors.premier.red}
           strokeWidth="2"
           vectorEffect="non-scaling-stroke"
         />

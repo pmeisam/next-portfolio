@@ -8,7 +8,10 @@ type Props = {
   isActive: boolean;
 };
 
-const Navbar = styled.div``;
+const Navbar = styled.div`
+  position: relative;
+  z-index: 1000;
+`;
 
 const Button = styled.div`
   position: fixed;
@@ -21,9 +24,6 @@ const Button = styled.div`
   align-items: center;
   margin: 2em;
   z-index: 2;
-  cursor: pointer;
-  &:hover {
-  }
 `;
 
 const Overlay = styled.div`
@@ -40,7 +40,7 @@ const Bar = styled.div`
   width: 10vw;
   height: 100vh;
   top: -100vh;
-  background: ${colors.night};
+  background: ${colors.premier.darkPurple};
 `;
 const Menu = styled.div`
   width: 100vw;
@@ -67,12 +67,12 @@ const StyledLink = styled(Link)<Props>`
   font-size: 35px;
   font-weight: 700;
   z-index: 2;
-  opacity: 0; /* Initial opacity set to 0 */
+  opacity: 0;
 
   ${({ isActive }) =>
     isActive &&
     css`
-      color: ${colors.red};
+      color: ${colors.premier.green};
     `}
 
   span {
@@ -81,11 +81,12 @@ const StyledLink = styled(Link)<Props>`
   }
 
   &:hover {
-    color: ${colors.gold};
+    color: ${colors.premier.red};
     ${({ isActive }) =>
       isActive &&
       css`
-        color: ${colors.red};
+        color: ${colors.premier.green};
+        cursor: default;
       `}
   }
 

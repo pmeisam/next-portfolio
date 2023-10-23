@@ -22,5 +22,11 @@ export const colors = {
   darkBlue: "#2B3A67",
   gold: "#F1C40F",
   red: "#E74C3C",
-
+  // premier league theme
+  premier: {
+    green: "#48F984",
+    darkPurple: "#2C0230",
+    blue: "#3EE9F5",
+    red: "#F8165C",
+  },
 };

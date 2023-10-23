@@ -4,6 +4,7 @@ import { ReactNode, useState, useEffect } from "react";
 import { fetchGlobal } from "lib/api/contentful";
 import { ContextType } from "types";
 import GlobalContext from "./globalContext";
+import Loading from "components/loading";
 
 export const GlobalProvider = ({ children }: { children: ReactNode }) => {
   const [loadingStatus, setLoadingStatus] = useState<
@@ -11,6 +12,7 @@ export const GlobalProvider = ({ children }: { children: ReactNode }) => {
   >("pending");
 
   const [data, setData] = useState<ContextType | null>(null);
+  const [showLoading, setShowLoading] = useState<boolean>(true);
 
   useEffect(() => {
     async function fetchData() {
@@ -26,8 +28,19 @@ export const GlobalProvider = ({ children }: { children: ReactNode }) => {
     fetchData();
   }, []);
 
-  if (loadingStatus === "pending") {
-    return <h1>Loading...</h1>;
+  useEffect(() => {
+    // After 4 seconds, set showLoading to false
+    const timer = setTimeout(() => {
+      setShowLoading(false);
+    }, 5000);
+
+    return () => {
+      clearTimeout(timer);
+    };
+  }, []);
+
+  if (showLoading || loadingStatus === "pending") {
+    return <Loading />;
   }
 
   if (loadingStatus === "rejected") {

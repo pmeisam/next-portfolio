@@ -19,7 +19,7 @@ const Navbar = () => {
     if (tl.current) {
       tl.current.reversed()
         ? tl.current.timeScale(1).play()
-        : tl.current.timeScale(4).reverse();
+        : tl.current.timeScale(3).reverse();
     }
   };
 
@@ -67,8 +67,8 @@ const Navbar = () => {
 
   return (
     <Navbar>
-      <Button className="button" onClick={revealMenu}>
-        <HamburgerMenu />
+      <Button className="button">
+        <HamburgerMenu onClick={revealMenu} />
       </Button>
       <Overlay className="overlay">
         <Bar className="bar" />
