@@ -3,6 +3,7 @@ import type { Metadata } from "next";
 
 import Navbar from "components/navbar";
 import { GlobalProvider } from "context/global/globalProvider";
+import ReduxProvider from "redux/Provider";
 
 export const metadata: Metadata = {
   title: "Meisam Poorzand",
@@ -18,8 +19,10 @@ export default function RootLayout({
     <html lang="en">
       <body>
         <GlobalProvider>
-          <Navbar />
-          {children}
+          <ReduxProvider>
+            <Navbar />
+            {children}
+          </ReduxProvider>
         </GlobalProvider>
       </body>
     </html>

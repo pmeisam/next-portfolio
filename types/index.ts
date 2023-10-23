@@ -13,3 +13,12 @@ export interface ContentfulResponse {
   };
   fields: any;
 }
+
+export type GlobalType = {
+  navbar: {
+    [key: string]: {
+      path: string;
+      title: string;
+    };
+  };
+};

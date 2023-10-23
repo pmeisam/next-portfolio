@@ -96,7 +96,7 @@ const HamburgerMenu = () => {
   }, []);
 
   return (
-    <Wrapper ref={tl} onClick={handleClick}>
+    <Wrapper onClick={handleClick}>
       <svg
         id="burger"
         fill={colors.darkBlue}

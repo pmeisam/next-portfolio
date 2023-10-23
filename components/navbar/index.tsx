@@ -90,9 +90,8 @@ const Navbar = () => {
             const isActive = numericKey % 2 === 0 ? true : false;
             const classNames = `link ${isActive && "ml-16"}`;
             return (
-              <MenuItem>
+              <MenuItem key={key}>
                 <Link
-                  key={key}
                   className={classNames}
                   isActive={pathName === menuItem.path}
                   href={menuItem.path}
