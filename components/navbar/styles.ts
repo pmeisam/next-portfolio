@@ -40,7 +40,7 @@ const Bar = styled.div`
   width: 10vw;
   height: 100vh;
   top: -100vh;
-  background: ${colors.premier.darkPurple};
+  background: ${colors.premier.darkerPurple};
 `;
 const Menu = styled.div`
   width: 100vw;

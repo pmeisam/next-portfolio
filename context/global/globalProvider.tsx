@@ -28,19 +28,23 @@ export const GlobalProvider = ({ children }: { children: ReactNode }) => {
     fetchData();
   }, []);
 
-  useEffect(() => {
-    // After 4 seconds, set showLoading to false
-    const timer = setTimeout(() => {
-      setShowLoading(false);
-    }, 5000);
+  // useEffect(() => {
+  //   // After 4 seconds, set showLoading to false
+  //   const timer = setTimeout(() => {
+  //     setShowLoading(false);
+  //   }, 5000);
 
-    return () => {
-      clearTimeout(timer);
-    };
-  }, []);
+  //   return () => {
+  //     clearTimeout(timer);
+  //   };
+  // }, []);
 
-  if (showLoading || loadingStatus === "pending") {
-    return <Loading />;
+  // if (showLoading || loadingStatus === "pending") {
+  // return <Loading />;
+  // }
+
+  if (loadingStatus === "pending") {
+    return <p>Loading...</p>;
   }
 
   if (loadingStatus === "rejected") {

@@ -28,5 +28,8 @@ export const colors = {
     darkPurple: "#2C0230",
     blue: "#3EE9F5",
     red: "#F8165C",
+    darkBlue: "#0033FF",
+    lightPurple: "#D36AF5",
+    darkerPurple: "#37033A",
   },
 };

@@ -1,8 +1,7 @@
 "use client";
-import React, { useEffect, useRef } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { usePathname } from "next/navigation";
 
-import { colors } from "theme";
 import useGlobal from "context/global/useGlobal";
 import { gsap } from "gsap";
 
@@ -14,6 +13,7 @@ const Navbar = () => {
   const { navbar } = useGlobal();
   const pathName = usePathname();
   const tl = useRef(gsap.timeline({ paused: true, reversed: true })); // define timeline using useRef
+  const [isOpen, setIsOpen] = useState(false);
 
   const revealMenu = () => {
     if (tl.current) {
@@ -31,7 +31,6 @@ const Navbar = () => {
         duration: 1,
       },
     });
-    const btnColor = colors.vintage.red;
 
     tl.current
       .to(".overlay", { y: "100vh", duration: 0 })
@@ -68,7 +67,7 @@ const Navbar = () => {
   return (
     <Navbar>
       <Button className="button">
-        <HamburgerMenu onClick={revealMenu} />
+        <HamburgerMenu isOpen={isOpen} onClick={revealMenu} />
       </Button>
       <Overlay className="overlay">
         <Bar className="bar" />
@@ -95,7 +94,10 @@ const Navbar = () => {
                   className={classNames}
                   isActive={pathName === menuItem.path}
                   href={menuItem.path}
-                  onClick={revealMenu}
+                  onClick={() => {
+                    revealMenu();
+                    setIsOpen((prevIsOpen) => !prevIsOpen);
+                  }}
                 >
                   <span>{key}</span>
                   {menuItem.title}

@@ -17,5 +17,9 @@
 }
 
 body {
-  background-color: #ffffff;
+  background-color: #2C0230;
+}
+
+.premier-green {
+  color: #48F984 !important;
 }

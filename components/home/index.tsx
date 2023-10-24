@@ -7,15 +7,25 @@ import { AppDispatch } from "redux/store";
 
 import { gsap } from "gsap";
 import * as styles from "./styles";
+import { Raleway } from "next/font/google";
+import Overlay from "components/overlay";
 
+const raleway = Raleway({ subsets: ["latin"], weight: "900" });
 
 export default function Home() {
-  const { Wrapper, TitleWrapper, Title, Space, CopyP: Copy, Btn: Button } = styles;
+  const {
+    Wrapper,
+    TitleWrapper,
+    Title,
+    Space,
+    CopyP: Copy,
+    Btn: Button,
+  } = styles;
   const dispatch = useDispatch<AppDispatch>();
   const homeData = useSelector(
     (state: any) => state.contentful.data?.portfolio
   );
-  const tl = useRef(gsap.timeline({ paused: true, reversed: true }));
+  // const tl = useRef(gsap.timeline({ paused: true, reversed: true }));
 
   useLayoutEffect(() => {
     if (!homeData) return;
@@ -37,7 +47,7 @@ export default function Home() {
       ease: "power4.inOut",
     });
 
-    tl.current.play();
+    // tl.current.play();
 
     return () => {
       gsap.killTweensOf(".title-char");
@@ -52,14 +62,23 @@ export default function Home() {
   if (!homeData) return null;
   return (
     <Wrapper>
-      <TitleWrapper>
+      <Overlay />
+
+      <TitleWrapper className={raleway.className}>
         {homeData.title.split(" ").map((word: string, index: number) => (
           <React.Fragment key={index}>
-            {word.split("").map((char: string, charIndex: number) => (
-              <Title className="title-char" key={`${char}-${charIndex}`}>
-                {char}
-              </Title>
-            ))}
+            {word.split("").map((char: string, charIndex: number) => {
+              console.log(word.toLowerCase() === "meisam.");
+              const className =
+                word.toLowerCase() === "meisam." && char !== "."
+                  ? "title-char premier-green"
+                  : "title-char";
+              return (
+                <Title className={className} key={`${char}-${charIndex}`}>
+                  {char}
+                </Title>
+              );
+            })}
             {index !== homeData.title.split(" ").length - 1 && (
               <Space>&nbsp;</Space>
             )}

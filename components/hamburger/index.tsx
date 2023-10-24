@@ -1,18 +1,24 @@
-import React, { useEffect, useRef } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { gsap, Sine } from "gsap";
 
 import { colors } from "theme";
 import * as styles from "./styles";
 
-const HamburgerMenu = ({ onClick }: { onClick: any }) => {
+const HamburgerMenu = ({
+  onClick,
+  isOpen,
+}: {
+  onClick: any;
+  isOpen: boolean;
+}) => {
   const { Wrapper } = styles;
-
   const tl = useRef(
     gsap.timeline({
       paused: true,
       reversed: true,
     })
-  ); // define timeline using useRef
+  );
+  const [initalRender, setInitalRender] = useState(true);
 
   const handleClick = () => {
     onClick();
@@ -22,6 +28,21 @@ const HamburgerMenu = ({ onClick }: { onClick: any }) => {
         : tl.current.reverse();
     }
   };
+
+  useEffect(() => {
+    !tl.current.reversed() && tl.current.reverse();
+  }, [isOpen]);
+
+  useEffect(() => {
+    if (initalRender) {
+      gsap.fromTo(
+        ".hamburger",
+        { opacity: 0, x: 100 },
+        { x: 0, opacity: 1, ease: "power4.inOut", delay: 1, duration: 2 }
+      );
+      setInitalRender(false);
+    }
+  });
 
   useEffect(() => {
     tl.current = gsap.timeline({
@@ -92,15 +113,15 @@ const HamburgerMenu = ({ onClick }: { onClick: any }) => {
       });
     return () => {
       // Cleanup function
-      // tl.current.kill(); // This will kill the timeline and its events
+      tl.current.kill(); // This will kill the timeline and its events
     };
   }, []);
 
   return (
-    <Wrapper onClick={handleClick}>
+    <Wrapper className="hamburger" onClick={handleClick}>
       <svg
         id="burger"
-        fill={colors.premier.red}
+        fill={colors.premier.green}
         width="30"
         className="openmenu"
         viewBox="0 0 30 30"
@@ -112,7 +133,7 @@ const HamburgerMenu = ({ onClick }: { onClick: any }) => {
           y1="15"
           x2="30"
           y2="15"
-          stroke={colors.premier.red}
+          stroke={colors.premier.green}
           strokeWidth="2"
           vectorEffect="non-scaling-stroke"
         />

@@ -13,11 +13,11 @@ export const Wrapper = styled.div`
   overflow: hidden;
 
   ${media.small`
-    padding: 8rem;
+    padding: 4rem;
 `}
 
   ${media.medium`
-        padding: 22rem;
+        padding: 10rem;
     `}
 `;
 
@@ -28,14 +28,23 @@ export const Space = styled.span`
 
 export const TitleWrapper = styled.div`
   display: flex;
+  justify-content: center;
+  ${media.small`
+    justify-content: left;
+  `}
 `;
 
 export const Title = styled.h1`
   font-size: 2.2rem;
-  color: ${colors.darkBlue};
+  color: ${colors.white};
+
   ${media.small`
     font-size: 3rem;
     `}
+  ${media.medium`
+    font-size: 5rem;
+    `}
+
   position: relative;
   z-index: 1;
 `;
@@ -46,6 +55,6 @@ export const CopyP = styled(Copy)`
 `;
 
 export const Btn = styled(Button)`
-    margin-left: auto;
-    margin-top: 1rem;
+  margin-left: auto;
+  margin-top: 1rem;
 `;
