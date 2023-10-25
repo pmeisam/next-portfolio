@@ -2,22 +2,6 @@ import styled, { css } from "styled-components";
 import { colors } from "theme/colors";
 
 const style = css`
-  //=== Drawing effect
-
-  //=== Button styling, semi-ignore
-  .btn {
-    background: none;
-    border: none;
-    cursor: pointer;
-    line-height: 1.5;
-    font: 700 1.2rem "Roboto Slab", sans-serif;
-    padding: 1em 2em;
-    letter-spacing: 0.05rem;
-
-    &:focus {
-      outline: 2px dotted #55d7dc;
-    }
-  }
   border: none;
   background: ${colors.premier.green};
   width: 16rem;
@@ -30,8 +14,8 @@ const style = css`
   border-radius: 2px;
   text-transform: uppercase;
   &:hover {
-    background: ${colors.premier.blue};
-    /* color: ${colors.premier.darkPurple}; */
+    background: ${colors.premier.yellow};
+    color: ${colors.premier.darkPurple};
   }
 `;
 export const Button = styled.button`

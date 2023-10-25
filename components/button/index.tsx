@@ -8,6 +8,7 @@ type ButtonProps = {
   onClick?: any;
   className?: string;
   href?: string;
+  id?: string;
 };
 
 const Button = ({
@@ -17,16 +18,17 @@ const Button = ({
   onClick,
   className,
   href,
+  id,
 }: ButtonProps) => {
   if (!href) {
     return (
-      <Btn className={className} type={type} onClick={onClick}>
+      <Btn className={className} onClick={onClick} id={id}>
         {children}
       </Btn>
     );
   } else {
     return (
-      <Link className={className} href={href}>
+      <Link className={className} href={href} id={id}>
         {children}
       </Link>
     );

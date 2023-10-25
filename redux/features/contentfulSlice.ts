@@ -1,11 +1,12 @@
 import { createAsyncThunk, createSlice, PayloadAction } from "@reduxjs/toolkit";
+import client from "lib/apolloClient";
+import { GET_HOME } from "graphql/queries/getHome";
+import { GET_EXPERIENCES } from "graphql/queries/getExperiences";
+
 import { contentfulClient } from "lib/api/contentful";
 
 import { status } from "constants/index";
 import { GlobalType } from "types/index";
-
-import { GET_HOME } from "graphql/queries/getHome";
-import client from "lib/apolloClient";
 
 export const fetchGlobal = createAsyncThunk<
   GlobalType,
@@ -35,6 +36,22 @@ export const fetchHome = createAsyncThunk<any, void, { rejectValue: string }>(
     }
   }
 );
+
+export const fetchExperiences = createAsyncThunk<
+  any,
+  void,
+  { rejectValue: string }
+>("fetchExperiences", async (_, { rejectWithValue }) => {
+  try {
+    const { data } = await client.query({ query: GET_EXPERIENCES });
+    console.log(data.items);
+    return data as any;
+  } catch (error) {
+    return rejectWithValue(
+      (error as any)?.networkError?.statusCode || "Unknown error"
+    );
+  }
+});
 
 type ContentfulState = {
   error: string | null;
@@ -84,6 +101,23 @@ const contentfulSlice = createSlice({
       state.error = action.payload;
       state.loadingStatus = status.ERROR;
     });
+    builder.addCase(
+      fetchExperiences.fulfilled,
+      (state, action: PayloadAction<any>) => {
+        state.data = action.payload;
+        state.loadingStatus = status.SUCCESS;
+      }
+    );
+    builder.addCase(fetchExperiences.pending, (state) => {
+      state.loadingStatus = status.PENDING;
+    });
+    builder.addCase(
+      fetchExperiences.rejected,
+      (state, action: PayloadAction<any>) => {
+        state.error = action.payload;
+        state.loadingStatus = status.ERROR;
+      }
+    );
   },
 });
 

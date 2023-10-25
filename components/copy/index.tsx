@@ -9,10 +9,11 @@ import { media } from "theme/media";
 
 type CopyProps = {
   copy: Document;
-  className: string;
+  className?: string;
+  id?: string;
 };
 
-const Wrapper = styled.p`
+const Wrapper = styled.div`
   /* font-family: Arial; */
   letter-spacing: 1px;
   color: ${colors.white};
@@ -27,9 +28,11 @@ const Wrapper = styled.p`
   `}
 `;
 
-const Copy: React.FC<CopyProps> = ({ copy, className }) => {
+const Copy: React.FC<CopyProps> = ({ copy, className, id }) => {
   return (
-    <Wrapper className={className}>{documentToReactComponents(copy)}</Wrapper>
+    <Wrapper id={id} className={className}>
+      {documentToReactComponents(copy)}
+    </Wrapper>
   );
 };
 

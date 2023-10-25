@@ -1,5 +1,3 @@
-// graphql/queries/getHome.ts
-
 import { gql } from "@apollo/client";
 
 export const GET_HOME = gql`

@@ -73,20 +73,30 @@ const StyledLink = styled(Link)<Props>`
     isActive &&
     css`
       color: ${colors.premier.green};
+      span {
+        color: white;
+      }
     `}
 
   span {
     font-size: 20px;
     margin-right: 2em;
+    color: ${colors.premier.red};
   }
 
   &:hover {
-    color: ${colors.premier.red};
+    color: ${colors.premier.yellow};
+    span {
+      color: ${colors.premier.red};
+    }
     ${({ isActive }) =>
       isActive &&
       css`
         color: ${colors.premier.green};
         cursor: default;
+        span {
+          color: ${colors.premier.red};
+        }
       `}
   }
 
