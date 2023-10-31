@@ -11,6 +11,14 @@ export const GET_EXPERIENCES = gql`
         description {
           json
         }
+        logo {
+          title
+          fileName
+          url
+        }
+        company
+        location
+        projectLinks
       }
     }
   }

@@ -1,13 +1,30 @@
-import React from "react";
+import { Suspense } from "react";
 
-const ProjectsPage = () => {
+import client from "lib/apolloClient";
+import { fetchGlobal } from "lib/api/contentful";
+
+import { GET_PROJECTS } from "graphql/queries/getProjects";
+import { GlobalProvider } from "context/global/globalProvider";
+import Loading from "app/loading";
+import { ProjectProps } from "types/index";
+import ProjectPage from "components/projectPage";
+
+const Project = async () => {
+  const items = await getProjectsData();
+  const global = await fetchGlobal();
+
   return (
-    <div>
-      <h1>Projects Page</h1>
-    </div>
+    <Suspense fallback={<Loading />}>
+      <GlobalProvider data={global}>
+        <ProjectPage items={items} />
+      </GlobalProvider>
+    </Suspense>
   );
 };
 
-export default ProjectsPage;
+const getProjectsData = async (): Promise<ProjectProps[]> => {
+  const { data } = await client.query({ query: GET_PROJECTS });
+  return data.projectCollection.items;
+};
 
-// rafce
+export default Project;

@@ -7,7 +7,6 @@ import { colors } from "theme";
 export const Navbar = styled.div`
   width: 100vw;
   height: 100vh;
-  background: ${colors.bgColor};
   font-family: "Roslindale Display Condensed";
   overflow: hidden;
 
@@ -21,7 +20,6 @@ export const Navbar = styled.div`
   }
 
   svg path {
-    fill: ${colors.overlayBg};
   }
 
   #toggle-btn {
@@ -42,7 +40,6 @@ export const Navbar = styled.div`
     position: absolute;
     width: 100px;
     height: 100px;
-    border: 1px solid ${colors.overlayBg};
   }
 
   .btn-outline-1 {
@@ -53,8 +50,6 @@ export const Navbar = styled.div`
   .btn-outline-2 {
     border-radius: 53% 47% 43% 57% / 51% 39% 61% 49%;
   }
-
-  
 
   #hamburger {
     position: relative;
@@ -70,7 +65,6 @@ export const Navbar = styled.div`
     display: inline-block;
     width: 24px;
     height: 1.25px;
-    background: ${colors.overlayBg};
     transition: transform 0.25s;
   }
 
@@ -78,10 +72,8 @@ export const Navbar = styled.div`
     position: absolute;
     right: 0;
     display: inline-block;
-    /* content: ""; */
     width: 18px;
     height: 1.25px;
-    background: ${colors.overlayBg};
     transform: translateY(-4px);
     transition: transform 0.25s;
   }
@@ -114,7 +106,6 @@ export const Navbar = styled.div`
     top: 120px;
     line-height: 70%;
     text-decoration: none;
-    color: ${colors.linkColor};
   }
 
   .menu a span {
@@ -134,7 +125,6 @@ export const Navbar = styled.div`
     left: -20px;
     width: 120%;
     height: 200%;
-    /* background: ${colors.overlayBg}; */
     margin: 0 auto;
   }
 

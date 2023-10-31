@@ -1,3 +1,5 @@
+import { Document } from "@contentful/rich-text-types";
+
 export interface ContextType {
   navbar: {
     [key: string]: {
@@ -22,3 +24,37 @@ export type GlobalType = {
     };
   };
 };
+
+export type ProjectProps = {
+  techs: string[] | null;
+  description: { json: Document };
+  title: string;
+  link: string | null;
+  galleryCollection: GalleryCollection;
+};
+
+export type ExperienceProps = {
+  __typename: "Work";
+  title: string;
+  description: {
+    json: Document;
+  };
+  links: {
+    json: Document;
+  };
+  logo: GalleryItem;
+  location: string;
+  company: string;
+  projectLinks: string[];
+};
+
+interface GalleryCollection {
+  items: GalleryItem[];
+}
+
+interface GalleryItem {
+  url: string;
+  fileName: string;
+  title: string;
+  description?: string;
+}
