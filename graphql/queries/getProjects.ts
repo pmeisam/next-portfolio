@@ -10,6 +10,7 @@ export const GET_PROJECTS = gql`
         }
         title
         link
+        backgroundColor
         galleryCollection(limit: 5) {
           items {
             url

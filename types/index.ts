@@ -31,6 +31,7 @@ export type ProjectProps = {
   title: string;
   link: string | null;
   galleryCollection: GalleryCollection;
+  backgroundColor: string;
 };
 
 export type ExperienceProps = {
