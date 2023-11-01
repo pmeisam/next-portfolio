@@ -25,7 +25,10 @@ const Experience = async () => {
 };
 
 const getWorkData = async (): Promise<ExperienceProps[]> => {
-  const { data } = await client.query({ query: GET_EXPERIENCES });
+  const { data } = await client.query({
+    query: GET_EXPERIENCES,
+    fetchPolicy: "network-only",
+  });
   return data.workCollection.items;
 };
 

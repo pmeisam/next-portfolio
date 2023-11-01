@@ -2,7 +2,7 @@ import { gql } from "@apollo/client";
 
 export const GET_PROJECTS = gql`
   query page {
-    projectCollection(limit: 10) {
+    projectCollection(limit: 10, order: title_ASC) {
       items {
         techs
         description {

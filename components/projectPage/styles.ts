@@ -50,7 +50,6 @@ export const ProjectsWrapper = styled.div`
   .desktop-photos {
     width: 40vw;
     height: 30vh;
-    border: 2px solid black;
     border-radius: 25px;
     position: relative;
     overflow: hidden;
@@ -58,7 +57,16 @@ export const ProjectsWrapper = styled.div`
   }
 
   .desktop-photo {
+    background-color: white;
+    border: 2px solid black;
     position: absolute;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+  }
+
+  .desktop-photo img {
     width: 100%;
     height: 100%;
   }
