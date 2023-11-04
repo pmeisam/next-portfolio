@@ -5,13 +5,22 @@ export const Spacer = styled.div`
   width: 100%;
   height: 50vh;
   background: #ddd;
+  display: flex;
 `;
+
+export const Title = styled.h1`
+  position: relative;
+  z-index: 1;
+  color: ${colors.premier.darkerPurple};
+  font-size: 10rem;
+  font-weight: 800;
+  /* display: inline; */
+`;
+
+export const Hr = styled.div``;
 
 export const ProjectsWrapper = styled.div`
   display: flex;
-  h1 {
-    font-size: clamp(2em, 4vw, 6em);
-  }
   p {
     font-size: clamp(1.4em, 2.5vw, 3.5em);
     line-height: 1.4;
@@ -43,16 +52,18 @@ export const DesktopContentSection = styled.div`
 `;
 
 export const H1 = styled.h1`
-  color: ${colors.white};
+  color: ${colors.premier.darkPurple};
+  font-size: clamp(2em, 4vw, 6em);
 `;
 
 export const DesktopPhotos = styled.div`
-  width: 40vw;
-  height: 30vh;
-  border-radius: 25px;
+  width: 500px;
+  height: 500px;
+  margin: 0 auto;
+  border-radius: 10px;
   position: relative;
   overflow: hidden;
-  box-shadow: 4px 4px 4px rgba(0, 0, 0, 0.4);
+  box-shadow: 4px 4px 4px 4px rgba(0, 0, 0, 0.1);
 `;
 
 export const DesktopPhoto = styled.div`
@@ -64,33 +75,26 @@ export const DesktopPhoto = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
+  background: linear-gradient(
+    0deg,
+    rgba(72, 249, 132, 1) 0%,
+    rgba(151, 214, 172, 1) 50%,
+    rgba(72, 249, 132, 1) 100%
+  );
 `;
 
 export const Image = styled.img`
   width: 80%;
-  height: 70%;
+  max-height: 80%;
+  /* height: 70%; */
 `;
 
-export const Red = styled.div`
-  background: crimson;
-`;
-
-export const Green = styled.div`
-  background: MediumSeaGreen;
-`;
-
-export const Blue = styled.div`
-  background: dodgerblue;
-`;
-
-export const Pink = styled.div`
-  background: deepPink;
-`;
-
-export const MobileContent = styled.div`
+export const MobileContentWrapper = styled.div`
   display: none;
   width: 80vw;
 `;
+
+export const MobileContent = styled.div``;
 
 export const MobilePhoto = styled.div`
   width: 80vw;

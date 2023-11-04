@@ -121,7 +121,7 @@ const HamburgerMenu = ({
     <Wrapper className="hamburger" onClick={handleClick}>
       <svg
         id="burger"
-        fill={colors.premier.green}
+        fill={colors.premier.red}
         width="30"
         className="openmenu"
         viewBox="0 0 30 30"
@@ -133,7 +133,7 @@ const HamburgerMenu = ({
           y1="15"
           x2="30"
           y2="15"
-          stroke={colors.premier.green}
+          stroke={colors.premier.red}
           strokeWidth="2"
           vectorEffect="non-scaling-stroke"
         />

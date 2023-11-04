@@ -1,0 +1,14 @@
+{
+    "academyMuseum": {
+        "link": "https://www.imdb.com/name/nm14548800/",
+        "logo": "imdb",
+        "backgroundColor": "yellow",
+        "title": "IMDB"
+    },
+    "aframe": {
+        "link": "https://www.academymuseum.org",
+        "logo": "log-id",
+        "backgroundColor": "black",
+        "title": "A.FRAME"
+    }
+}

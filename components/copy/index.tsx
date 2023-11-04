@@ -16,7 +16,7 @@ type CopyProps = {
 const Wrapper = styled.div`
   /* font-family: Arial; */
   letter-spacing: 1px;
-  color: ${colors.white};
+  color: ${colors.night};
   font-size: 16px;
   font-weight: 100;
   text-align: center;

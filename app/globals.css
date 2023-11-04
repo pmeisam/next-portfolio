@@ -17,10 +17,14 @@
 }
 
 body {
-  background-color: #2C0230;
+  background-color: #d7d7d7;
   overflow-x: hidden;
 }
 
 .premier-green {
   color: #48F984 !important;
+}
+
+.premier-red {
+  color: #F8165C !important;
 }

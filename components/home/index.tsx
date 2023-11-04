@@ -71,7 +71,7 @@ export default function Home({ data }: { data: any }) {
             {word.split("").map((char: string, charIndex: number) => {
               const idNames =
                 word.toLowerCase() === "meisam." && char !== "."
-                  ? "premier-green"
+                  ? "premier-red"
                   : "";
               return (
                 <Title

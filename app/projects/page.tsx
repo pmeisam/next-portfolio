@@ -23,7 +23,10 @@ const Project = async () => {
 };
 
 const getProjectsData = async (): Promise<ProjectProps[]> => {
-  const { data } = await client.query({ query: GET_PROJECTS });
+  const { data } = await client.query({
+    query: GET_PROJECTS,
+    fetchPolicy: "network-only",
+  });
   return data.projectCollection.items;
 };
 

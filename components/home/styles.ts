@@ -36,13 +36,13 @@ export const TitleWrapper = styled.div`
 
 export const Title = styled.h1`
   font-size: 2.2rem;
-  color: ${colors.white};
+  color: ${colors.premier.darkPurple};
 
   ${media.small`
     font-size: 3rem;
     `}
   ${media.medium`
-    font-size: 5rem;
+    font-size: 5.4rem;
     `}
 
   position: relative;
@@ -57,4 +57,10 @@ export const CopyP = styled(Copy)`
 export const Btn = styled(Button)`
   margin-left: auto;
   margin-top: 1rem;
+  background-color: ${colors.premier.red};
+  color: white;
+
+  &:hover {
+    background-color: ${colors.premier.green};
+  }
 `;
