@@ -36,6 +36,7 @@ export type ProjectProps = {
 
 export type ExperienceProps = {
   __typename: "Work";
+  sys: { id: string };
   title: string;
   description: {
     json: Document;

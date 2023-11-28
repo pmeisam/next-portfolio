@@ -1,7 +1,12 @@
+import Room from "components/Room";
 import React from "react";
 
 const Contact = () => {
-  return <div>Contact</div>;
+  return (
+    <div>
+      <Room />
+    </div>
+  );
 };
 
 export default Contact;

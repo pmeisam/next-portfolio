@@ -1,15 +1,14 @@
 import { Suspense } from "react";
-import dynamic from "next/dynamic";
 
 import client from "lib/apolloClient";
 import { fetchGlobal } from "lib/api/contentful";
-import { Document } from "@contentful/rich-text-types";
 
 import { GET_EXPERIENCES } from "graphql/queries/getExperiences";
 import { GlobalProvider } from "context/global/globalProvider";
 import Loading from "app/loading";
-import Work from "components/work";
+import ExperienceComponent from "components/experience";
 import { ExperienceProps } from "types/index";
+import Head from "next/head";
 
 const Experience = async () => {
   const items = await getWorkData();
@@ -17,8 +16,14 @@ const Experience = async () => {
 
   return (
     <Suspense fallback={<Loading />}>
+      <Head>
+        <link
+          rel="stylesheet"
+          href="https://cdn.jsdelivr.net/gh/devicons/devicon@v2.15.1/devicon.min.css"
+        />
+      </Head>
       <GlobalProvider data={global}>
-        <Work items={items} />
+        <ExperienceComponent items={items} />
       </GlobalProvider>
     </Suspense>
   );

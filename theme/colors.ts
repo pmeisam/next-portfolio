@@ -33,4 +33,5 @@ export const colors = {
     darkerPurple: "#37033A",
     yellow: "#EDFD06",
   },
+  icon: "#505168",
 };
