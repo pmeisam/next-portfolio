@@ -37,6 +37,6 @@
     "theme/media.js",
     ".next/types/**/*.ts",
     "lib/api/contentful.ts"
-  ],
+, "components/ThreeComponents/Objects.jsx", "components/ThreeComponents/Frame.jsx"  ],
   "exclude": ["node_modules"]
 }

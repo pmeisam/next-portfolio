@@ -10,7 +10,6 @@ export const Wrapper = styled.div`
   height: 100vh;
   padding: 20px;
   justify-content: center;
-  overflow: hidden;
 
   ${media.small`
     padding: 4rem;

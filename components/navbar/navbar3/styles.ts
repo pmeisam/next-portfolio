@@ -8,7 +8,7 @@ export const Navbar = styled.div`
   width: 100vw;
   height: 100vh;
   font-family: "Roslindale Display Condensed";
-  overflow: hidden;
+  /* overflow: hidden; */
 
   .overlay {
     position: absolute;
